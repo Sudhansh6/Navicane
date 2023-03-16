@@ -1,0 +1,18 @@
+To setup these codes on a Raspberry Pi, you can follow these steps:
+
+Install the required dependencies for each code. For example, if your codes use OpenCV or TensorFlow, you will need to install these libraries on your Raspberry Pi.
+
+Connect any necessary hardware, such as the ultrasonic sensor for depth estimation.
+
+Save the code for each function in a separate file, with a .py extension. For example, you might save the depth estimation code in a file called depth_estimation.py.
+
+Transfer the code files to your Raspberry Pi. You can use tools like scp or rsync to transfer the files from your computer to the Raspberry Pi.
+
+Open a terminal window on the Raspberry Pi and navigate to the directory where you saved the code files.
+
+Run each code in a separate terminal window using the python command followed by the name of the code file. For example, to run the depth estimation code, you would run:
+
+Copy code
+python depth_estimation.py
+If you want to run all three codes in parallel, you can create a new Python file that contains the multiprocessing code from the previous answer, save it to the Raspberry Pi, and run it using the python command.
+These are general steps and may vary depending on the specific requirements of your project. You may also need to configure some settings or permissions on the Raspberry Pi to ensure that your code can access hardware and other resources.

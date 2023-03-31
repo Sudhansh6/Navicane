@@ -3,7 +3,7 @@ import time
 
 # Set up GPIO pins
 TRIG = 16  # GPIO pin for ultrasonic sensor trigger
-ECHO = 18  # GPIO pin for ultrasonic sensor echo
+ECHO = 17  # GPIO pin for ultrasonic sensor echo
 MOTOR_PIN = 12  # GPIO pin for vibrating motor
 
 GPIO.setmode(GPIO.BOARD)
@@ -31,7 +31,7 @@ GPIO.output(TRIG, False)
 print("Waiting for sensor to settle...")
 time.sleep(2)
 
-try:
+def depth_estimation():
     while True:
         # Trigger ultrasonic sensor
         GPIO.output(TRIG, True)
@@ -68,9 +68,12 @@ try:
         # Wait before next measurement
         time.sleep(0.1)
 
-except KeyboardInterrupt:
-    print("Stopped")
-    GPIO.cleanup()
+if __name__ == "__main__":
+    try:
+        depth_estimation()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        print("Program depth stopped by user. GPIO cleanup completed.")
 
 """
     In this code, we use a circular buffer to store the last window_size distance measurements and compute the moving average of those measurements. We then check for a sudden change in depth by comparing the current distance to the moving average, and if the difference is greater than a threshold (in this case, 10 cm), we alert the user with the vibrating motor. The alert_user function simply turns on the motor for half a second before turning it off again.

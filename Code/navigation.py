@@ -20,6 +20,23 @@ RIGHT_TURN = [0.5, 0.1, 0.5]  # Vibrate for 0.5 seconds, pause for 0.1 seconds, 
 # Load map data from file
 with open("map_data.json", "r") as f:
     map_data = json.loads(f.read())
+    
+def get_next_waypoint(current_location, instruction):
+    for route in map_data:
+        # Check if the current location is on the current route segment
+        if current_location in route["overview_polyline"]["points"]:
+            index = route["overview_polyline"]["points"].index(current_location)
+            
+            # Get the index of the next waypoint based on the instruction
+            if instruction == "left":
+                next_index = index - 1
+            elif instruction == "right":
+                next_index = index + 1
+            else:
+                next_index = index + 1
+            
+            # Return the coordinates of the next waypoint
+            return route["overview_polyline"]["points"][next_index]
 
 def get_delay(current_location, instruction):
     # Get the coordinates of the next waypoint based on the instruction

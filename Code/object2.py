@@ -1,4 +1,6 @@
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
+# from EmulatorGUI import GPIO
+import SimulRPi.GPIO as GPIO
 import time
 
 # Set GPIO mode and pin numbers

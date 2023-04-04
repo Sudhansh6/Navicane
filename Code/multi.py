@@ -1,4 +1,6 @@
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
+# from EmulatorGUI import GPIO
+import SimulRPi.GPIO as GPIO
 import multiprocessing
 import time
 from depth import depth_estimation as depth
@@ -6,7 +8,7 @@ from object import object_detection as object
 from navigation import navigate
 
 # Define GPIO pins for each button
-DEPTH_BUTTON_PIN = 22
+DEPTH_BUTTON_PIN = 2
 OBJECT_BUTTON_PIN = 23
 NAVIGATION_BUTTON_PIN = 24
 

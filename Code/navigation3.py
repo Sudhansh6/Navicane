@@ -2,7 +2,7 @@ import requests
 import json
 from geopy import distance, Point
 from geopy.geocoders import Nominatim
-from gpiozero import PWMOutputDevice
+# from gpiozero import PWMOutputDevice
 from time import sleep
 
 # Define your Bing Maps API key
@@ -30,15 +30,15 @@ items = data["resourceSets"][0]["resources"][0]['routeLegs'][0]['itineraryItems'
 motor_pin = 17
 
 # Create a PWMOutputDevice object for the vibration motor
-motor = PWMOutputDevice(motor_pin)
+# motor = PWMOutputDevice(motor_pin)
 
-# Define the haptic feedback levels for different maneuver types
-feedback_levels = {
-    'DepartStart': 1.0,  # Strong vibration for departure
-    'TurnLeft': 0.5,  # Medium vibration for left turn
-    'TurnRight': 0.5,  # Medium vibration for right turn
-    'GoStraight': 0.2,  # Weak vibration for straight path
-    'ArriveFinish': 1.0,  # Strong vibration for arrival
+# Define the haptic feedback patterns for different maneuver types
+vibration_patterns = {
+    'DepartStart': [0.5, 0.5, 0.0, 0.0],  # Short buzz for departure
+    'TurnLeft': [0.2, 0.0, 0.2, 0.0],  # Three short buzzes for left turn
+    'TurnRight': [0.2, 0.2, 0.2, 0.0],  # Three short buzzes for right turn
+    'GoStraight': [0.2, 0.0, 0.2, 0.0],  # Two short buzzes for straight path
+    'ArriveFinish': [0.5, 0.5, 0.5, 0.5],  # Four short buzzes for arrival
 }
 
 # Loop through the itinerary items and extract the left-right directions and maneuver points
@@ -71,13 +71,14 @@ while True:
         instruction = item['instruction']['text']
         maneuver_type = item['details'][0]['maneuverType']
 
-        # Determine the appropriate haptic feedback based on the maneuver type
-        feedback_level = feedback_levels.get(maneuver_type, 0.2)
+        # Determine the appropriate vibration pattern based on the maneuver type
+        vibration_pattern = vibration_patterns.get(maneuver_type, [0.1])
 
-        # Set the vibration motor to the appropriate feedback level for a duration of 1 second
-        motor.value = feedback_level
-        sleep(1)
-        motor.value = 0
+        # Loop through the vibration pattern and trigger the motor accordingly
+        # for duration in vibration_pattern:
+        #     motor.value = 1.0
+        #     sleep(duration)
+        #     motor.value = 0
 
         # Print the instruction text
         print(instruction)
@@ -87,11 +88,11 @@ while True:
         break
 
     # Check if the right arrow key is pressed
-    tmp = input('next point?')
-    if tmp == 'n':
-        # Move to the next maneuver
-        current_maneuver_index += 1
-
+    # tmp = input('next point?')
+    # if tmp == 'n':
+    #     # Move to the next maneuver
+    #     current_maneuver_index += 1
+    current_maneuver_index += 1
 
 # Clean up the GPIO pins
 motor.close()

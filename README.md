@@ -7,7 +7,7 @@ Navicane aims to enable visually impaired people to navigate better in the outsi
 
 The cane has been designed over multiple rounds, taking feedback from the visually impaired community, to make the product more user-friendly.
 
-We developed a working prototype (MVP) of the cane and gave a live demonstration.
+We developed a working prototype (MVP) of the cane and gave a live demonstration. [Here](https://drive.google.com/file/d/1ANGijHTus1zfdI6lw8c4Gaz6qyPCGbvI/view?usp=share_link) is a pitch video demonstrating our idea.
 
 ## Technology
 The scripts are written in Python and are executed on a Raspberry Pi onboard the cane. The circuits are powered by a typical portable powerbank, which can be easily charged. 
